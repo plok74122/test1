@@ -7,6 +7,12 @@ class DiariesController < ApplicationController
 		@diary = Diary.new
 	end
 
+	def create
+		@diary = current_user.diaries.new(params_permit)
+		@diary.save
+		redirect_to diaries_path
+	end
+
 	def destroy
 		@diary.destroy
 		redirect_to diaries_path

@@ -9,12 +9,17 @@
   </head>
 
   <body>
+  <% if notice %>
   	<div class="alert alert-success">
   		<strong><%= notice %></strong>
   	</div>
+  <% end %>
+  
+  <% if alert %>
   	<div class="alert alert-success">
   		<strong><%= alert %></strong>
   	</div>
+  <% end %>
 
     <%= yield %>
   </body>
