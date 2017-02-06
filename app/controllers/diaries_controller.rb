@@ -17,18 +17,34 @@ class DiariesController < ApplicationController
 
 	def create
 		@diary = current_user.diaries.new(params_permit)
-		@diary.save
-		redirect_to diaries_path
+		if @diary.save
+			flash[:notice] = "Create Success!"
+			redirect_to diaries_path
+		else
+			@diaries = Diary.all
+			flash[:alert] = "Create Failure"
+			render action: :index
+		end
 	end
 
 	def update
-		@diary.update(params_permit)
-		redirect_to diaries_path
+		if current_user==@diary.user
+			@diary.update(params_permit)
+			redirect_to diaries_path
+		else
+			flash[:alert] = "It's not your diary!"
+			redirect_to diaries_path
+		end
 	end
 
 	def destroy
-		@diary.destroy
-		redirect_to diaries_path
+		if current_user==@diary.user
+			@diary.destroy
+			redirect_to diaries_path
+		else
+			flash[:alert] = "It's not your diary!"
+			redirect_to diaries_path
+		end
 	end
 	private
 		def set_diary

@@ -9,6 +9,17 @@
   </head>
 
   <body>
+  <div style="float:right">
+    <% if current_user %>
+      <%= current_user.email %>
+    <% end %>
+    <% if user_signed_in? %>
+      <%= link_to "logout", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
+    <% else %>
+      <%= link_to "login", new_user_session_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
   <% if notice %>
   	<div class="alert alert-success">
   		<strong><%= notice %></strong>
