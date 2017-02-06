@@ -11,6 +11,7 @@
 			<tr>
 				<td><%= diary.title %></td>
 				<td><%= diary.context %></td>
+				<td><%= link_to "Edit", diaries_path(diary_id: diary), class: "btn btn-primary" %></td>
 				<td><%= link_to "Delete", diary_path(diary), method: :delete, class: "btn btn-primary" %></td>
 			</tr>
 		<% end %>
